@@ -14,6 +14,14 @@ class Card(object):
     def __cmp__(self, o):
         return o.value - self.value
 
+class Action(object):
+    def __init__(self, player, card):
+        self.player = player
+        self.card = card
+
+    def __cmp__(self, o):
+        return cmp(self.card, o.card)
+
 class Strategy(object):
     
     def set_hand(self, cards):
@@ -42,14 +50,18 @@ class Context(object):
         self.players.append(strategy)
         
     def do_turn():
-        cards = []
+        actions = []
         for player in self.players:
             card = player.act()
             if card:
-                cards.append(card)
-            cards.sort()
-        for i, card in enumerate(cards):
-            
+                actions.append(Action(player, card))
+        # sort by card value
+        actions.sort()
+        collisions = 0
+        vmap = {}
+        for card in cards:
+            vmap[card.value] 
+            pass            
     
     def __repr__(self):
         st = ''
